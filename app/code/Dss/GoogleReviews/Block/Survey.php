@@ -155,7 +155,7 @@ class Survey extends Template
      * @param int $groupId
      * @return bool
      */
-    private function validateCustomerGroup(int $groupId): bool
+    private function validateCustomerGroup($groupId)
     {
         return $this->configHelper->isOfferSurveyToAllCustomers()
             || in_array($groupId, $this->configHelper->getCustomerGroupsToOffer());

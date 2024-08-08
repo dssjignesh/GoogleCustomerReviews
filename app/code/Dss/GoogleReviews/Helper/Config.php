@@ -158,9 +158,9 @@ class Config extends AbstractHelper
      *
      * @param string $shippingMethod
      * @param string $country
-     * @return int
+     * @return string
      */
-    public function getCustomDeliveryTimeRules(string $shippingMethod, string $country): int
+    public function getCustomDeliveryTimeRules(string $shippingMethod, string $country): string
     {
         $customValue = $this->customTimeHelper->getConfigValue($shippingMethod, $country);
         return $customValue ?: $this->scopeConfig
