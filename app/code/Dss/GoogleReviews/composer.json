@@ -1,0 +1,21 @@
+{
+    "name": "dss/m2-google-customer-reviews",
+    "description": "Google Customer Reviews by Dss",
+    "type": "magento2-module",
+    "version": "0.0.1",
+    "license": [
+        "Commercial"
+    ],
+    "require": {
+        "php": "^8.1",
+        "magento/product-community-edition": "^2.4.5"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Dss\\GoogleReviews\\": ""
+        }
+    }
+}

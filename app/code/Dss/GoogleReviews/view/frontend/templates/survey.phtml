@@ -1,0 +1,41 @@
+<?php
+/**
+ * Digit Software Solutions.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ *
+ * @category  Dss
+ * @package   Dss_GoogleReviews
+ * @author    Extension Team
+ * @copyright Copyright (c) 2024 Digit Software Solutions. ( https://digitsoftsol.com )
+ */
+
+/**  @var $block Dss\GoogleReviews\Block\Survey */
+?>
+<script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+
+<?php if ($block->getLanguage()): ?>
+    <script>
+        window.___gcfg = {
+            lang: "<?= /* @noEscape */ $block->getLanguage() ?>"
+        };
+    </script>
+<?php endif; ?>
+
+<script>
+    window.renderOptIn = function () {
+        window.gapi.load('surveyoptin', function () {
+            window.gapi.surveyoptin.render({
+                "merchant_id": "<?= /* @noEscape */ $block->getSurveyData('merchant_id') ?>",
+                "order_id": "<?= /* @noEscape */ $block->getSurveyData('order_id') ?>",
+                "email": "<?= /* @noEscape */ $block->getSurveyData('email') ?>",
+                "delivery_country": "<?= /* @noEscape */ $block->getSurveyData('delivery_country') ?>",
+                "estimated_delivery_date": "<?= /* @noEscape */ $block->getSurveyData('estimated_delivery_date') ?>",
+                "opt_in_style": "<?= /* @noEscape */ $block->getSurveyData('opt_in_style') ?>"
+            });
+        });
+    };
+</script>

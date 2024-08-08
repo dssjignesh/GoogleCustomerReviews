@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Digit Software Solutions.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ *
+ * @category  Dss
+ * @package   Dss_GoogleReviews
+ * @author    Extension Team
+ * @copyright Copyright (c) 2024 Digit Software Solutions. ( https://digitsoftsol.com )
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="google" type="host">*.google.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="google" type="host">*.google.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>
