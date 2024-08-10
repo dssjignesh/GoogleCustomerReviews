@@ -16,30 +16,43 @@ declare(strict_types=1);
  */
 namespace Dss\GoogleReviews\Block\Adminhtml\Form\Field;
 
+use Magento\Framework\View\Element\Html\Select;
 use Magento\Framework\Escaper;
+use Magento\Directory\Model\ResourceModel\Country\Collection;
+use Magento\Directory\Model\ResourceModel\Country\CollectionFactory;
+use Magento\Framework\View\Element\Context;
 
-class Countries extends \Magento\Framework\View\Element\Html\Select
+class Countries extends Select
 {
     /** @var array */
     private $countries;
 
-    /** @var \Magento\Directory\Model\ResourceModel\Country\Collection */
+    /** @var Collection */
     private $countryCollection;
 
     /**
-     * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory
+     * @param Context $context
+     * @param CollectionFactory $countryCollectionFactory
      * @param Escaper $escaper
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Context $context,
-        \Magento\Directory\Model\ResourceModel\Country\CollectionFactory $countryCollectionFactory,
+        Context $context,
+        private CollectionFactory $countryCollectionFactory,
         private Escaper $escaper,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->countryCollection = $countryCollectionFactory->create();
+    }
+
+    /**
+     * Lazy loads the country collection.
+     */
+    private function loadCountryCollection()
+    {
+        if ($this->countryCollection === null) {
+            $this->countryCollection = $this->countryCollectionFactory->create();
+        }
     }
 
     /**
@@ -50,6 +63,7 @@ class Countries extends \Magento\Framework\View\Element\Html\Select
     protected function getCountries(): array
     {
         if ($this->countries === null) {
+            $this->loadCountryCollection();
             $countries = $this->countryCollection->toOptionArray(false);
             foreach ($countries as $country) {
                 if (!isset($country['is_region_visible']) || $country['is_region_visible']) {
